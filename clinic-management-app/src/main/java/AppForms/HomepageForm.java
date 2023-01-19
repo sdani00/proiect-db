@@ -31,7 +31,7 @@ public class HomepageForm extends JFrame{
         womanButton.setText("Angajat");
         womanButton.setHorizontalAlignment(JButton.CENTER);
 
-        ImageIcon button1Icon = new ImageIcon(buildImage("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-fr.png", 70,70));
+        ImageIcon button1Icon = new ImageIcon(buildImage("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-fr.png", 60,70));
         button1Button.setIcon(button1Icon);
 
 
@@ -62,5 +62,4 @@ public class HomepageForm extends JFrame{
 
         return photo.getScaledInstance(width, height, Image.SCALE_DEFAULT);
     }
-
 }
