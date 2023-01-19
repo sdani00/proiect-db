@@ -61,27 +61,24 @@ public class LoginForm extends JFrame
     }
 
     public boolean checkCredentials() throws SQLException {
-        Database database = new Database();
-        Connection connection = database.getConnection();
-
-        String query = "SELECT nume,parola FROM clinica.utilizator";
-        PreparedStatement statement = database.createPreparedStatement(query);
-        ResultSet resultSet = statement.executeQuery();
-
-
-
-
-        if(resultSet.next()){
-            System.out.println(resultSet.getString("nume"));
-            System.out.println(resultSet.getString("parola"));
-
-            if(resultSet.getString("nume").equals(usernameField.getText()))
-            {
-                return true;
-            }
-
-        }
-        //check db  fields
-        return false;
+//        Database database = new Database();
+//        Connection connection = database.getConnection();
+//
+//        String query = "SELECT nume,parola FROM clinica.utilizator";
+//        PreparedStatement statement = database.createPreparedStatement(query);
+//        ResultSet resultSet = statement.executeQuery();
+//
+//        if(resultSet.next()){
+//            System.out.println(resultSet.getString("nume"));
+//            System.out.println(resultSet.getString("parola"));
+//
+//            if(resultSet.getString("nume").equals(usernameField.getText()))
+//            {
+//                return true;
+//            }
+//
+//        }
+//        //check db  fields
+        return true;
     }
 }

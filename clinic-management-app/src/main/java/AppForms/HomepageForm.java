@@ -11,23 +11,34 @@ public class HomepageForm extends JFrame{
     private JButton viewEmployeeButton;
     private JButton logoutButton;
     private JPanel homepagePanel;
+    private JButton womanButton;
+    private JButton button1Button;
+    private JButton button2Button;
 
     public HomepageForm() throws IOException {
 
-        Image photo = ImageIO.read(new File("H:\\colab_bd\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-mr.png"));
-        Image image = photo.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        Image photo = ImageIO.read(new File("src/main/java/resources/btn-mr.png"));
+        Image image = photo.getScaledInstance(60, 70, Image.SCALE_DEFAULT);
 
         ImageIcon icon = new ImageIcon(image);
 
         this.setSize(400,400);
         this.setContentPane(homepagePanel);
-        this.setBackground(new Color(255255255));
         this.setVisible(true);
 
-        viewEmployeeButton.setBounds(0,30, 100,100);
+        ImageIcon womanIcon = new ImageIcon(buildImage("src/main/java/resources/btn-profile.png", 60, 70));
+        womanButton.setIcon(womanIcon);
+        womanButton.setText("Angajat");
+        womanButton.setHorizontalAlignment(JButton.CENTER);
+
+        ImageIcon button1Icon = new ImageIcon(buildImage("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-fr.png", 70,70));
+        button1Button.setIcon(button1Icon);
+
+
+        ImageIcon button2Icon = new ImageIcon(buildImage("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-hr.png",60,70));
+        button2Button.setIcon(button2Icon);
 
         viewEmployeeButton.setIcon(icon);
-
         viewEmployeeButton.addActionListener(event -> {
             if(event.getSource() == viewEmployeeButton) {
                 //
@@ -42,5 +53,14 @@ public class HomepageForm extends JFrame{
                 new LoginForm("Login");
             }
         });
+
+        this.pack();
     }
+
+    public Image buildImage(String path, int width, int height) throws IOException {
+        Image photo = ImageIO.read(new File(path));
+
+        return photo.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+    }
+
 }
