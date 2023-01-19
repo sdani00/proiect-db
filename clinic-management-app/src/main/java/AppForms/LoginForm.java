@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginForm extends JFrame
@@ -28,6 +30,7 @@ public class LoginForm extends JFrame
 
         this.setVisible(true);
         this.setContentPane(loginPanel);
+
         this.pack();
 
 
@@ -39,11 +42,14 @@ public class LoginForm extends JFrame
                         this.dispose();
                         new HomepageForm();
 
-                     if(!checkCredentials()) {
-                         JOptionPane.showMessageDialog(loginPanel, "Wrong credentials");
-                     }
+
                     }
+                    else {
+                        JOptionPane.showMessageDialog(loginPanel, "Wrong credentials");
+                    }
+
                 } catch (SQLException | IOException e) {
+
                     e.printStackTrace();
                 }
             }
@@ -55,9 +61,27 @@ public class LoginForm extends JFrame
     }
 
     public boolean checkCredentials() throws SQLException {
-      /*  Database database = new Database();
-        Connection connection = database.getConnection();*/
+        Database database = new Database();
+        Connection connection = database.getConnection();
+
+        String query = "SELECT nume,parola FROM clinica.utilizator";
+        PreparedStatement statement = database.createPreparedStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+
+
+
+
+        if(resultSet.next()){
+            System.out.println(resultSet.getString("nume"));
+            System.out.println(resultSet.getString("parola"));
+
+            if(resultSet.getString("nume").equals(usernameField.getText()))
+            {
+                return true;
+            }
+
+        }
         //check db  fields
-        return true;
+        return false;
     }
 }

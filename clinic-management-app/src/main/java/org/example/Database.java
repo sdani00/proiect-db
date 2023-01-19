@@ -3,12 +3,12 @@ package org.example;
 import java.sql.*;
 
 public class Database {
-    private String url = "jdbc:mysql://localhost:3306/testdb?serverTimezone=UTC";
+    private String url = "jdbc:mysql://localhost:3306/clinica?serverTimezone=UTC";
     private Connection connection;
 
     public Connection getConnection() throws SQLException {
         try {
-            connection = DriverManager.getConnection(url, "root", "");
+            connection = DriverManager.getConnection(url, "root", "Szilike24");
             return connection;
         }
         catch (SQLException exception) {

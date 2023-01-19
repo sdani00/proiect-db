@@ -14,7 +14,7 @@ public class HomepageForm extends JFrame{
 
     public HomepageForm() throws IOException {
 
-        Image photo = ImageIO.read(new File("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-mr.png"));
+        Image photo = ImageIO.read(new File("H:\\colab_bd\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-mr.png"));
         Image image = photo.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 
         ImageIcon icon = new ImageIcon(image);
