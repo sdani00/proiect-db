@@ -3,8 +3,10 @@ package AppForms;
 import org.example.Database;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -24,10 +26,11 @@ public class LoginForm extends JFrame
         this.setBounds(0, 300, 200, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         this.setVisible(true);
         this.setContentPane(loginPanel);
         this.pack();
+
+
 
         loginButton.addActionListener(event -> {
             if(event.getSource() == loginButton) {
@@ -40,7 +43,7 @@ public class LoginForm extends JFrame
                          JOptionPane.showMessageDialog(loginPanel, "Wrong credentials");
                      }
                     }
-                } catch (SQLException e) {
+                } catch (SQLException | IOException e) {
                     e.printStackTrace();
                 }
             }
