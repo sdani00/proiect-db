@@ -18,7 +18,7 @@ public class HomepageForm extends JFrame{
 
     public HomepageForm() throws IOException {
 
-        Image photo = ImageIO.read(new File("src/main/java/resources/btn-mr.png"));
+        Image photo = ImageIO.read(new File("clinic-management-app/src/main/java/resources/btn-mr.png"));
         Image image = photo.getScaledInstance(60, 70, Image.SCALE_DEFAULT);
 
         ImageIcon icon = new ImageIcon(image);
@@ -27,16 +27,16 @@ public class HomepageForm extends JFrame{
         this.setContentPane(homepagePanel);
         this.setVisible(true);
 
-        ImageIcon womanIcon = new ImageIcon(buildImage("src/main/java/resources/btn-profile.png", 60, 70));
+        ImageIcon womanIcon = new ImageIcon(buildImage("clinic-management-app/src/main/java/resources/btn-profile.png", 60, 70));
         womanButton.setIcon(womanIcon);
         womanButton.setText("Angajat");
         womanButton.setHorizontalAlignment(JButton.CENTER);
 
-        ImageIcon button1Icon = new ImageIcon(buildImage("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-fr.png", 60,70));
+        ImageIcon button1Icon = new ImageIcon(buildImage("clinic-management-app/src/main/java/resources/btn-fr.png", 60,70));
         button1Button.setIcon(button1Icon);
 
 
-        ImageIcon button2Icon = new ImageIcon(buildImage("D:\\Clinic Management\\proiect-db\\clinic-management-app\\src\\main\\java\\resources\\btn-hr.png",60,70));
+        ImageIcon button2Icon = new ImageIcon(buildImage("clinic-management-app/src/main/java/resources/btn-hr.png",60,70));
         button2Button.setIcon(button2Icon);
 
         viewEmployeeButton.setIcon(icon);
