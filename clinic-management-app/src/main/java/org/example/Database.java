@@ -8,7 +8,7 @@ public class Database {
 
     public Connection getConnection() throws SQLException {
         try {
-            connection = DriverManager.getConnection(url, "root", "Szilike24");
+            connection = DriverManager.getConnection(url, "root", "1234");
             return connection;
         }
         catch (SQLException exception) {

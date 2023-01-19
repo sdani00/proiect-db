@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="AppForms.HomepageForm">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="AppForms.AdminForm">
   <grid id="27dc6" binding="homepagePanel" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -64,14 +64,6 @@
           <text value=""/>
           <verticalAlignment value="1"/>
           <verticalTextPosition value="3"/>
-        </properties>
-      </component>
-      <component id="543bd" class="javax.swing.JButton" binding="buttonTest">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="ButtonTest"/>
         </properties>
       </component>
     </children>

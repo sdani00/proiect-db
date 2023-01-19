@@ -3,17 +3,10 @@ package AppForms;
 import org.example.Database;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class LoginForm extends JFrame
-{
+public class LoginForm extends JFrame {
     private JPanel loginPanel;
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -33,23 +26,23 @@ public class LoginForm extends JFrame
 
         this.pack();
 
-
-
         loginButton.addActionListener(event -> {
-            if(event.getSource() == loginButton) {
+            if (event.getSource() == loginButton) {
                 try {
-                    if(checkCredentials()) {
+                    if (checkCredentials()) {
                         this.dispose();
-                        new HomepageForm();
 
+                        new EmployeeForm();
 
-                    }
-                    else {
+                      /*  if(checkIfAdmin(usernameField.getText())) {
+                            new AdminForm(usernameField.getText());
+                        }*/
+
+                    } else {
                         JOptionPane.showMessageDialog(loginPanel, "Wrong credentials");
                     }
 
                 } catch (SQLException | IOException e) {
-
                     e.printStackTrace();
                 }
             }
@@ -60,25 +53,44 @@ public class LoginForm extends JFrame
         new LoginForm("Login");
     }
 
+    public JTextField getUsernameField() {
+        return usernameField;
+    }
+
     public boolean checkCredentials() throws SQLException {
-//        Database database = new Database();
-//        Connection connection = database.getConnection();
-//
-//        String query = "SELECT nume,parola FROM clinica.utilizator";
-//        PreparedStatement statement = database.createPreparedStatement(query);
-//        ResultSet resultSet = statement.executeQuery();
-//
-//        if(resultSet.next()){
-//            System.out.println(resultSet.getString("nume"));
-//            System.out.println(resultSet.getString("parola"));
-//
-//            if(resultSet.getString("nume").equals(usernameField.getText()))
-//            {
-//                return true;
-//            }
-//
-//        }
-//        //check db  fields
+        Database database = new Database();
+        Connection connection = database.getConnection();
+
+        String query = "select nume,parola from clinica.utilizator where nume = ?;";
+
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, usernameField.getText());
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            if (resultSet.getString("parola").equals(passwordField.getText())) {
+                return true;
+            }
+        }
+
         return true;
     }
+
+    public boolean checkIfAdmin(String name) throws SQLException {
+        Database database = new Database();
+
+        CallableStatement statement = database.createCallableStatement("{call check_if_doctor(?, ?)}");
+        statement.setString(1, name);
+        statement.registerOutParameter(2, Types.TINYINT);
+        statement.execute();
+
+        int result = statement.getInt(2);
+
+        if (result == 1)
+            return true;
+
+        return false;
+    }
 }
+
