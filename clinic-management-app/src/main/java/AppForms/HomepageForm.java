@@ -14,6 +14,7 @@ public class HomepageForm extends JFrame{
     private JButton womanButton;
     private JButton button1Button;
     private JButton button2Button;
+    private JButton buttonTest;
 
     public HomepageForm() throws IOException {
 
