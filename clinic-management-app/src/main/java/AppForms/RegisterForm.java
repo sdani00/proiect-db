@@ -48,6 +48,11 @@ public class RegisterForm extends JFrame {
                 try {
                     this.addUser();
                     JOptionPane.showMessageDialog(registerPanel, "Utilizator adaugat cu succes!");
+                    this.dispose();
+
+                    if(comboBox.getSelectedItem().toString().equals("Medic")) {
+                        new MedicForm();
+                    }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

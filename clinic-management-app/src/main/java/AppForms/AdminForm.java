@@ -3,8 +3,11 @@ package AppForms;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class AdminForm extends JFrame{
 
@@ -29,7 +32,6 @@ public class AdminForm extends JFrame{
 
         ImageIcon womanIcon = new ImageIcon(buildImage("src/main/java/resources/btn-profile.png", 60, 70));
         womanButton.setIcon(womanIcon);
-        womanButton.setText("Angajat");
         womanButton.setHorizontalAlignment(JButton.CENTER);
 
         ImageIcon button1Icon = new ImageIcon(buildImage("src/main/java/resources/btn-fr.png", 60,70));
@@ -42,7 +44,11 @@ public class AdminForm extends JFrame{
         viewEmployeeButton.setIcon(icon);
         viewEmployeeButton.addActionListener(event -> {
             if(event.getSource() == viewEmployeeButton) {
-                System.out.println("ssss");
+                try {
+                    new EmployeeForm();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -54,6 +60,15 @@ public class AdminForm extends JFrame{
         });
 
         this.pack();
+        womanButton.addActionListener(event -> {
+           if(event.getSource() == womanButton) {
+               try {
+                   new UsersForm();
+               } catch (SQLException e) {
+                   throw new RuntimeException(e);
+               }
+           }
+        });
     }
 
     public Image buildImage(String path, int width, int height) throws IOException {
