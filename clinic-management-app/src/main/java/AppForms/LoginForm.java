@@ -53,7 +53,11 @@ public class LoginForm extends JFrame {
         });
         registerButton.addActionListener(event -> {
             if(event.getSource() == registerButton) {
-                new RegisterForm();
+                try {
+                    new RegisterForm();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
