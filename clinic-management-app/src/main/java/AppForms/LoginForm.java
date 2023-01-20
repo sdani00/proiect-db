@@ -3,6 +3,8 @@ package AppForms;
 import org.example.Database;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.*;
 
@@ -13,6 +15,8 @@ public class LoginForm extends JFrame {
     private JButton loginButton;
     private JLabel usernameLabel;
     private JLabel passowrdLabel;
+    private JButton registerButton;
+    private JButton pacientButton;
 
     public LoginForm(String title) {
         super(title);
@@ -47,15 +51,21 @@ public class LoginForm extends JFrame {
                 }
             }
         });
+        registerButton.addActionListener(event -> {
+            if(event.getSource() == registerButton) {
+                new RegisterForm();
+            }
+        });
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         new LoginForm("Login");
     }
 
     public JTextField getUsernameField() {
         return usernameField;
     }
+
 
     public boolean checkCredentials() throws SQLException {
         Database database = new Database();

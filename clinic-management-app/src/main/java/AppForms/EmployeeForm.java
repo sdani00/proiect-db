@@ -1,20 +1,22 @@
 package AppForms;
 
-import org.example.Database;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class EmployeeForm extends JFrame{
     private JPanel employeePanel;
-    private JTextField searchTextField;
     private JButton dataButton;
     private JButton scheduleButton;
     private JButton holydayButton;
-
+    private JTextField usernameField;
 
     public EmployeeForm() throws IOException {
 
@@ -45,6 +47,37 @@ public class EmployeeForm extends JFrame{
         this.setContentPane(employeePanel);
         this.setVisible(true);
 
+        dataButton.addActionListener(event -> {
+            if(event.getSource() == dataButton) {
+                try {
+                    new SearchForm(usernameField.getText());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        holydayButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    new Holidays(usernameField.getText());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        scheduleButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    new ScheduleForm(usernameField.getText());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
 
