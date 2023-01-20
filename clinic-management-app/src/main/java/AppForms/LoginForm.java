@@ -35,8 +35,35 @@ public class LoginForm extends JFrame {
                 try {
                     if (checkCredentials()) {
                         this.dispose();
+                        int x = checkIfAdmin(usernameField.getText());
+                        if(x==0){
+                            this.dispose();
+                           // new DoctorForm();
+                        }
+                      /*  if(x == 1)
+                        {
+                            this.dispose();
+                            new AsistentForm(usernameField.getText());
+                        }
+                        if(x==2){
+                            this.dispose();
+                            new EmployeeForm();
+                        }
+                        if(x==3)
+                        {
+                            this.dispose();
+                            new ReceptionerForm();
+                        }
+                        if(x==4){
+                            this.dispose();
+                            new Expert();
+                        }*/
+                        if(x==5){
+                            this.dispose();
+                            new AdminForm(usernameField.getText());
+                        }
 
-                        new EmployeeForm();
+
 
                       /*  if(checkIfAdmin(usernameField.getText())) {
                             new AdminForm(usernameField.getText());
@@ -91,7 +118,7 @@ public class LoginForm extends JFrame {
         return true;
     }
 
-    public boolean checkIfAdmin(String name) throws SQLException {
+    public int checkIfAdmin(String name) throws SQLException {
         Database database = new Database();
 
         CallableStatement statement = database.createCallableStatement("{call check_if_doctor(?, ?)}");
@@ -102,9 +129,56 @@ public class LoginForm extends JFrame {
         int result = statement.getInt(2);
 
         if (result == 1)
-            return true;
+        {
+            return 0;
+        }
+        statement = database.createCallableStatement("call_check_if_asistent(?,?)}");
+        statement.setString(1,name);
+        statement.registerOutParameter(2,Types.TINYINT);
+        statement.execute();
 
-        return false;
+        result = statement.getInt(2);
+
+        if(result==1)
+        {
+            return 1;
+        }
+
+        statement = database.createCallableStatement("call_check_if_inspector(?,?)}");
+        statement.setString(1,name);
+        statement.registerOutParameter(2,Types.TINYINT);
+        statement.execute();
+
+        result = statement.getInt(2);
+
+        if(result==1)
+        {
+            return 2;
+        }
+
+        statement = database.createCallableStatement("call_check_if_receptioner(?,?)}");
+        statement.setString(1,name);
+        statement.registerOutParameter(2,Types.TINYINT);
+        statement.execute();
+
+        result = statement.getInt(2);
+
+        if(result==1)
+        {
+            return 3;
+        }
+        statement = database.createCallableStatement("call_check_if_expert(?,?)}");
+        statement.setString(1,name);
+        statement.registerOutParameter(2,Types.TINYINT);
+        statement.execute();
+
+        result = statement.getInt(2);
+
+        if(result==1)
+        {
+            return 4;
+        }
+        return 5;
     }
 }
 
